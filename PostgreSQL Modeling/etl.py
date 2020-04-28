@@ -42,7 +42,8 @@ def process_log_file(cur, filepath):
     # insert user records
     for i, row in user_df.iterrows():
         cur.execute(user_table_insert, row)
-
+    
+    # Make sure start_time appears in df as timestamp
     df['start_time']=t
     # insert songplay records
     for index, row in df.iterrows():
