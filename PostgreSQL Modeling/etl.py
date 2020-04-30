@@ -6,6 +6,12 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """
+    Extract .json files of song records and insert records into songs and artists tables.
+    Input: 
+    cur: the cursor connection to PostgreSQL
+    filepath: the location of .json song record file
+    """
     # open song file
     df = pd.read_json(filepath,lines=True)
 
@@ -19,6 +25,12 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """
+    Extract .json files of log records and insert records into users, time and songplays tables.
+    Input: 
+    cur: the cursor connection to PostgreSQL
+    filepath: the location of .json log record file
+    """
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -63,6 +75,15 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+    Find and extract lists of all .json record files, use specified functions to extract .json files of song and log records
+    and insert records into fact table and dimension tables.
+    Input: 
+    cur: the cursor connection to PostgreSQL
+    conn: the connection to PostgreSQL
+    filepath: the location of .json song record file
+    func: the function used for target .json files (process_song_file or process_log_file)
+    """
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -82,6 +103,10 @@ def process_data(cur, conn, filepath, func):
 
 
 def main():
+    """
+    Connect to PostgreSQL database and process song and log data using process_data function. 
+    Input: None
+    """
     conn = psycopg2.connect("host=127.0.0.1 dbname=sparkifydb user=student password=student")
     cur = conn.cursor()
 
