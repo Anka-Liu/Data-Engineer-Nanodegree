@@ -17,37 +17,21 @@ Columns: songplay_id, start_time, user_id, level, song_id, artist_id, session_id
 ## Dimension Tables
 
 ### users
-users in the app.     
-Source: log_data  
-Columns: user_id, first_name, last_name, gender, level  
+Columns: firstName,lastName,song,userId 
+Partition Keys: song, 
 
 ### songs
-songs in music database.   
-Source: songs_data.   
-Columns: song_id, title, artist_id, year, duration   
+Columns: artist,firstName,itemInSession,lastName,sessionId,song,userId
+Partition Keys: (sessionId, userId),itemInSession
 
-### artists
-artists in music database.   
-Source: songs_data    
-Columns: artist_id, name, location, latitude, longitude   
-
-### time
-timestamps of records in songplays broken down into specific units.   
-Source: log_data   
-Columns: start_time, hour, day, week, month, year, weekday     
+### music   
+Columns: artist,itemInSession,length,sessionId,song  
+Partition Keys: sessionId, itemInSession
 
 ## Files
 
-data: folder storing song and user activity data in .json format.    
-create_tables.py: clean database and create new fact and dimension tables.    
-etl.ipynb: experiments of etl pipeline code.   
-etl.py: conduct etl pipeline to insert records from json files in data folder.    
-sql_queries.py: storage of SQL create/insert/drop commands.    
-test.ipynb: test whether the tables are created and filled.    
-
-## How To Use
-
-1. run create_tables.py  
-2. run etl.py  
-3. run test.ipynb to check database
+event_data: folder storing song and user activity data in .csv format.    
+images: folder storing illustration of full table.    
+event_datafile_new.csv: full table data produced by Project_1B_ Project_Template.ipynb.
+Project_1B_ Project_Template.ipynb: main file of table creation and query execution. 
 
