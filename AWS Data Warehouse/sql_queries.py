@@ -1,15 +1,12 @@
 import configparser
-config=configparser.ConfigParser()
-config.read_file(open('dwh.cfg'))
-IAM_ROLE = config['IAM_ROLE']['ARN']
-LOG_DATA = config['S3']['LOG_DATA']
-SONG_DATA = config['S3']['SONG_DATA']
-LOG_JSONPATH = config['S3']['LOG_JSONPATH']
 
 # CONFIG
 config = configparser.ConfigParser()
 config.read('dwh.cfg')
-
+IAM_ROLE = config['IAM_ROLE']['ARN']
+LOG_DATA = config['S3']['LOG_DATA']
+SONG_DATA = config['S3']['SONG_DATA']
+LOG_JSONPATH = config['S3']['LOG_JSONPATH']
 
 # DROP TABLES
 
@@ -209,6 +206,7 @@ where start_time is not null
 """)
 
 # QUERY LISTS
+# The order of creating and inserting tables is altered for foreign key implementations.
 
 create_table_queries = [staging_events_table_create, staging_songs_table_create, user_table_create, song_table_create, artist_table_create, time_table_create, songplay_table_create]
 drop_table_queries = [staging_events_table_drop, staging_songs_table_drop, songplay_table_drop, user_table_drop, song_table_drop, artist_table_drop, time_table_drop]
