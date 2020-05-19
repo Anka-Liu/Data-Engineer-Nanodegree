@@ -5,7 +5,7 @@ from sql_queries import create_table_queries, drop_table_queries
 
 def drop_tables(cur, conn):
     """
-    Drop raw, fact, and dimension tables.
+    Drop staging, fact, and dimension tables.
     Input: 
     cur: cursor from database connection
     conn: database connection object to Redshift
@@ -17,7 +17,7 @@ def drop_tables(cur, conn):
 
 def create_tables(cur, conn):
     """
-    Create raw, fact, and dimension tables.
+    Create staging, fact, and dimension tables.
     Input: 
     cur: cursor from database connection
     conn: database connection object to Redshift
