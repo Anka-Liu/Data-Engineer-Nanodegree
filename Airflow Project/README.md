@@ -20,7 +20,7 @@ The schema, tables, and columns are the same with those in [PostgreSQL Data Mode
 
 ## DAG Structure
 
-<img src="Dag Structur.png">
+<img src="Dag Structure.png">
 
 ## Files
 
