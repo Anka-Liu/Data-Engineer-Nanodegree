@@ -20,6 +20,8 @@ The schema, tables, and columns are the same with those in [PostgreSQL Data Mode
 
 ## DAG Structure
 
+<img src="Dag Structur.png">
+
 ## Files
 
 create_tables: SQL queries of creating staging, fact, and dimension tables before starting data pipeline
