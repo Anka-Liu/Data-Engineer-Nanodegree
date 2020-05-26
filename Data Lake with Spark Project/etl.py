@@ -144,7 +144,7 @@ def process_log_data(spark, input_data, output_data):
     # extract columns from joined song and log datasets to create songplays table 
     song_df.createOrReplaceTempView("song_data")
     songplays_table = spark.sql("""
-        select row_number() over(order by datetime) as songplay_id,
+        select distinct row_number() over(order by datetime) as songplay_id,
                datetime as start_time,
                userId as user_id,
                level,
@@ -152,7 +152,9 @@ def process_log_data(spark, input_data, output_data):
                artist_id,
                sessionId as session_id,
                location,
-               userAgent as user_agent
+               userAgent as user_agent,
+               year(datetime) as year,
+               month(datetime) as month
         from time_table as t
         join song_data as s
         on t.song = s.title and 
@@ -162,7 +164,7 @@ def process_log_data(spark, input_data, output_data):
     print('Songplays_table extracted successfully.')
 
     # write songplays table to parquet files partitioned by year and month
-    songplays_table.write.parquet(output_data+'songplays_table.parquet',mode='overwrite')
+    songplays_table.write.parquet(output_data+'songplays_table.parquet',mode='overwrite',partitionBy=['year','month'])
     print('Songplays_table wrote down successfully.')
 
 
